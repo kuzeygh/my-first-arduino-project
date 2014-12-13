@@ -3,6 +3,8 @@
  */
  
 int led = 13;
+int MAXVALUE = 400;
+int volume;
 
 void setup(){
   Serial.begin(9600);
@@ -10,14 +12,16 @@ void setup(){
 }
 
 void loop(){
-  digitalWrite(led, LOW);
-
-  int sensorValue = analogRead(A0);
-
-  float voltage = sensorValue * (5.0 / 1023.0);
+  volume = analogRead(A1);
   
-  Serial.print("V: ");
-  Serial.print(voltage);
-  Serial.println("--");
+  Serial.print("Volume:");
+  Serial.println(volume);
   delay(100);
+  
+  if(volume >= MAXVALUE){
+    digitalWrite(led, HIGH); 
+  }else{
+    digitalWrite(led, LOW); 
+  }
+  
 }
